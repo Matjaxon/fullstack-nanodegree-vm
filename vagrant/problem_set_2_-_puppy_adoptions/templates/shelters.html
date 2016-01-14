@@ -1,0 +1,33 @@
+<!-- DOCTYPE HTML -->
+
+<html>
+<head>
+</head>
+<body>
+
+<h1>PAWs - Puppy Adoption Website</h1>
+</br>
+
+<!-- Link to all available puppies in all shelters -->
+<h4>See all available puppies</h4>
+</br>
+
+<!-- Links to participating shelter pages -->
+<h3>Our Shelters</h3>
+
+	<!-- Loop through all shelters in database -->
+	{% for shelter in shelters %}
+
+	<!-- Creat a div for each shelter -->
+	<div>
+		<p> {{shelter.name}}</p>
+		<p> {{shelter.address}}</p>
+		<p> {{shelter.city}}</p>
+		<p> {{shelter.state}}</p>
+		<p> {{shelter.zipCode}}</p>
+		<p> Available Puppies : TBD</p>
+	</div></br>
+	{% endfor %}
+
+</body>
+</html>

@@ -39,6 +39,17 @@ class MenuItem(Base):  #setting up sql tables via python class
 		Integer, ForeignKey('restaurant.id'))
 	restaurant = relationship(Restaurant)
 
+	@property
+	def serialize(self):
+		# Returns object data in easily searialeable format
+		return {
+			'name' : self.name,
+			'description' : self.description,
+			'id' : self.id,
+			'price' : self.price,
+			'course' : self.course,
+		}
+
 
 
 ##### instert at end of file ######
