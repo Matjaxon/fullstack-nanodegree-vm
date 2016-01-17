@@ -23,6 +23,13 @@ class Restaurant(Base):  #setting up sql tables via python class
 	id = Column(
 		Integer, primary_key = True)
 
+	@property
+	def serialize(self):
+		return {
+			'id' : self.id,
+			'name' : self.name,
+		}
+
 
 class MenuItem(Base):  #setting up sql tables via python class
 	__tablename__ = 'menu_item'

@@ -1,19 +1,45 @@
 <!-- DOCTYPE HTML -->
 
 <html>
+
+	<head>
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel = stylesheet type = text/css href = "{{ url_for('static', filename = 'css/styles.css') }}">	
+		<link rel="stylesheet" href= "{{ url_for('static', filename = 'css/bootstrap.min.css') }}">
+	</head>
+
 	<body>
 
-		<h1>Edit Menu Item</h1>
+	<div class = "container, menuProjectDefault">	
+			<h1>Edit Menu Item</h1>
 
-		<form action = '{{ url_for("editMenuItem", restaurant_id = restaurant_id, menu_id = menu_id )}}' method = 'post'>
+			<form action = '{{ url_for("editMenuItem", restaurant_id = restaurant.id, menu_id = item.id )}}' method = 'post'>
 
-		<p>Name: </p>
-			<input type = 'text' size = '30' name = 'name' placeholder = '{{i.name}}'>
+				<p>Name:</br>
+				<input type = 'text' size = '30' name = 'name' value = '{{item.name}}' required></br></br>
+				
+				Description:</br>
+				<input type = 'text' size = '80' name = 'description' value = '{{item.description}}' required></br></br>
 
-		<input type='submit' value='Edit'><a href = "{{ url_for('restaurantMenu', restaurant_id = restaurant_id ) }}">Cancel </a>
+				Course:</br>
+				<input type = 'radio' name = 'course' value = ' Appetizer' {% if item.course == 'Appetizer' %} checked {% endif %} required>Appetizer</br>
+				<input type = 'radio' name = 'course' value = ' Entree' {% if item.course == 'Entree' %} checked {% endif %} required>Entree</br>
+				<input type = 'radio' name = 'course' value = ' Beverage' {% if item.course == 'Beverage' %} checked {% endif %} required>Beverage</br>
+				<input type = 'radio' name = 'course' value = ' Dessert' {% if item.course == 'Dessert' %} checked {% endif %} required>Dessert</br></br>
+				Price: </br>
 
-		</form>
+				<input type = 'text' size = '10' name = 'price' value = '{{item.price}}' required ></br></br>
 
+				<input type='submit' value='Edit'> <a href = "{{ url_for('showMenu', restaurant_id = restaurant.id ) }}">Cancel </a>
+
+			</form>
+		</br>
+		</br>
+
+
+	</div>
 
 	</body>
 </html>

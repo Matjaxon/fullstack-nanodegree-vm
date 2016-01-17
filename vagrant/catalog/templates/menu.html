@@ -2,51 +2,220 @@
 <html>
 
 <head>
-	<link rel=stylesheet type = text/css href = "{{url_for('static', filename = 'styles.css') }}"></head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel = stylesheet type = text/css href = "{{ url_for('static', filename = 'css/styles.css') }}">	
+	<link rel="stylesheet" href= "{{ url_for('static', filename = 'css/bootstrap.min.css') }}">
+</head>
 
 <body>
 
-<h1>{{ restaurant.name }}</h1>
-
+<div class = "container, menuProjectDefault">
+	<div class = "row">
+		<h1>{{ restaurant.name }}</h1>
+	</div>
+	<div class = "row, flash">
 		{% with messages = get_flashed_messages() %}
-	
-	{% if messages %}
 
-		<ul>
-		{% for message in messages %}
-			<li><strong> {{ message }} </strong></li>
-		{% endfor %}
-		</ul>
+			{% if messages %}
+
+			<ul>
+				{% for message in messages %}
+					<li><strong> {{ message }} </strong></li>
+				{% endfor %}
+			</ul>
+
+			{% endif %}
+
+		{% endwith %}
+	</div>
+
+	{% if items %}
+
+
+		{% if appetizers %}
+
+		<div class = "courseContainer">
+
+			<div class = "row">
+				<div class = "col-md-12">
+					<p class = "courseTitle">Appetizers</p>
+				</div>
+			</div>
+
+			{% for appetizer in appetizers %}
+
+			<div class = "row, itemName">
+				<div class = "col-md-12">
+					<p>{{appetizer.name}}</p>
+				</div>
+			</div>
+
+			<div class = "row">
+				<div class = "col-md-9, itemDescription">
+					<p>{{appetizer.description}}</p>
+				</div>
+				<div class = "col-md-3, price">
+					<p> {{appetizer.price}} </p>
+				</div>
+			</div>
+
+			<div class = "row">
+				<div class = "col-md-12, editDelete">
+					<p><a href= 
+						"{{url_for('editMenuItem', restaurant_id = appetizer.restaurant_id, menu_id = appetizer.id)}}">Edit</a> 
+
+					<a href = "{{url_for('deleteMenuItem', restaurant_id = appetizer.restaurant_id, menu_id = appetizer.id)}}">Delete</a></p>
+				</div>
+			</div>
+
+			{% endfor %}
+
+		</div>
 
 		{% endif %}
-	{% endwith %}
+
+		{% if entrees %}
+
+		<div class = "courseContainer">
+
+			<div class = "row, courseTitle">
+				<div class = "col-md-12">
+					<p>Entrees</p>
+				</div>
+			</div>
+
+			{% for entree in entrees %}
+
+			<div class = "row, itemName">
+				<div class = "col-md-12">
+					<p>{{entree.name}}</p>
+				</div>
+			</div>
+
+			<div class = "row">
+				<div class = "col-md-9, itemDescription">
+					<p>{{entree.description}}</p>
+				</div>
+				<div class = "col-md-3, price">
+					<p> {{entree.price}} </p>
+				</div>
+			</div>
+
+			<div class = "row">
+				<div class = "col-md-12, editDelete">
+					<p><a href= 
+						"{{url_for('editMenuItem', restaurant_id = entree.restaurant_id, menu_id = entree.id)}}">Edit</a> 
+
+					<a href = "{{url_for('deleteMenuItem', restaurant_id = entree.restaurant_id, menu_id = entree.id)}}">Delete</a></p>
+				</div>
+			</div>
+
+			{% endfor %}
+
+		</div>
+
+		{% endif %}
 
 
-<div>
-<p><a href = {{url_for('newMenuItem', restaurant_id = restaurant.id)}}>
-	Create New Menu Item</a></br></br></p>
-</div>
+		{% if desserts %}
 
+		<div class = "courseContainer">
 
-{% for i in items %}
+			<div class = "row, courseTitle">
+				<div class = "col-md-12">
+					<p>Desserts</p>
+				</div>
+			</div>
 
-<div>
+			{% for dessert in desserts %}
 
-<p>{{i.name}}</p>
+			<div class = "row">
+				<div class = "col-md-12, itemName">
+					<p>{{dessert.name}}</p>
+				</div>
+			</div>
 
-<p>{{i.description}}</p>
+			<div class = "row">
+				<div class = "col-md-9, itemDescription">
+					<p>{{dessert.description}}</p>
+				</div>
+				<div class = "col-md-3, price">
+					<p> {{dessert.price}} </p>
+				</div>
+			</div>
 
-<p> {{i.price}} </p>
+			<div class = "row">
+				<div class = "col-md-12, editDelete">
+					<p><a href= 
+						"{{url_for('editMenuItem', restaurant_id = dessert.restaurant_id, menu_id = dessert.id)}}">Edit</a> 
 
+					<a href = "{{url_for('deleteMenuItem', restaurant_id = dessert.restaurant_id, menu_id = dessert.id)}}">Delete</a></p>
+				</div>
+			</div>
 
-<!-- to use the url_for below the first input in '' is the route method.  The inputs after it are the additional inputs that the method uses. -->
-<p><a href= {{url_for('editMenuItem', restaurant_id = i.restaurant_id, menu_id = i.id)}}>Edit</a></br>
-	<a href = {{url_for('deleteMenuItem', restaurant_id = i.restaurant_id, menu_id = i.id)}}>Delete</a></p>
-</br>
-</div>
+			{% endfor %}
 
+		</div>	
 
-{% endfor %}
+		{% endif %}
+
+		{% if beverages %}
+
+		<div class = "courseContainer">
+
+			<div class = "row">
+				<div class = "col-md-12, courseTitle">
+					<p>Beverages</p>
+				</div>
+			</div>
+
+			{% for beverage in beverages %}
+
+			<div class = "row">
+				<div class = "col-md-12, itemName">
+					<p>{{beverage.name}}</p>
+				</div>
+			</div>
+
+			<div class = "row">
+				<div class = "col-md-9, itemDescription">
+					<p>{{beverage.description}}</p>
+				</div>
+				<div class = "col-md-3, price">
+					<p>{{beverage.price}}</p>
+				</div>
+			</div>
+
+			<div class = "row">
+				<div class = "col-md-12, editDelete">
+					<p><a href= 
+						"{{url_for('editMenuItem', restaurant_id = beverage.restaurant_id, menu_id = beverage.id)}}">Edit</a> 
+
+					<a href = "{{url_for('deleteMenuItem', restaurant_id = beverage.restaurant_id, menu_id = beverage.id)}}">Delete</a></p>
+				</div>
+			</div>
+
+			{% endfor %}
+
+		</div>
+
+		{% endif %}	
+
+		{% else %}
+
+			<p style = "background-color: 82CAFF;"> <strong>You have no menu items. </strong></p>
+
+		{% endif %}
+
+		<div>
+			<p><a href = {{url_for('newMenuItem', restaurant_id = restaurant.id)}}>
+				Create New Menu Item</a></br>
+
+			<a href = {{url_for('showRestaurants')}}>Return to all restaurants</a></p>
+		</div>
+
 </body>
 
 </html>

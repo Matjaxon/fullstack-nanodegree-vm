@@ -1,21 +1,46 @@
 <!DOCTYPE HTML>
 
 <html>
+
+	<head>
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel = stylesheet type = text/css href = "{{ url_for('static', filename = 'css/styles.css') }}">	
+		<link rel="stylesheet" href= "{{ url_for('static', filename = 'css/bootstrap.min.css') }}">
+	</head>
+
 	<body>
 
-		<h1>New Menu Item</h1>
+		<div class = "container, menuProjectDefault">
+
+			<h1>New Menu Item for {{restaurant.name}}</h1>
 
 			<form action = '#' method = 'post'>
 
-<!-- 		<form action = '{{ url_for("newMenuItem", restaurant_id = restaurant_id )}}' method = 'post'> -->
+				<p>Item Name:</br>
+				<input type = 'text' size = '30' name = 'name' required></br></br>
 
-		<p>Name: </p>
-			<input type = 'text' size = '30' name = 'name'>
+				Description:</br>
+				<input type = 'text' size = '80' name = 'description' required></br></br>
 
-		<input type='submit' value='Create'>
-		<a href = '#'> Cancel </a>
+				Course:</br>
+				<input type = 'radio' name = 'course' value = 'Appetizer' required>Appetizer</br>
+				<input type = 'radio' name = 'course' value = 'Entree' required>Entree</br>
+				<input type = 'radio' name = 'course' value = 'Beverage' required>Beverage</br>
+				<input type = 'radio' name = 'course' value = 'Dessert' required>Desert</br></br>
 
-		</form>
+				Price:</br>
+				<input type = 'text' size = '10' name = 'price' placeholder = "$9.99" required></p>
+
+				<input type='submit' value='Create'>
+				<a href = '{{url_for("showMenu", restaurant_id = restaurant.id)}}'> Cancel </a>
+
+			</form>
+			</br>
+			</br>
+
+		</div>
 
 	</body>
 </html>

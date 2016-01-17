@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel = stylesheet type = text/css href = "{{ url_for('static', filename = 'css/styles.css') }}">	
+		<link rel="stylesheet" href= "{{ url_for('static', filename = 'css/bootstrap.min.css') }}">
+	</head>
+
+	<body class = "menuProjectDefault">
+
+		<h1> Menu Project Website </h1>
+
+		{% with messages = get_flashed_messages() %}
+
+		{% if messages %}
+
+		<ul class = flash>
+		{% for message in messages %}
+			<li><strong> {{message}} </strong></li>
+		{% endfor %}
+		</ul>
+
+		{% endif %}
+		{% endwith %}
+
+		<h3><a href = "{{url_for('newRestaurant') }}">Create New Restaurant</a></h3>
+		<div class = "container-fluid">
+			{% for restaurant in restaurants %}
+			<div class = "container-fluid, restaurantPane">
+				<div class = "row">
+					<div class = "col-md-6">
+						<div>
+							<p class = restaurantPaneTitle><strong><a href = "{{url_for('showMenu', restaurant_id = restaurant.id) }}">{{ restaurant.name }}</a></strong></p>
+						</div>
+					</div>
+					<div class = "col-md-6">
+						<p><img src="http://placehold.it/150x150" class = "image-responsive" align = "right"></p>
+					</div>
+				</div>
+				<div class = "row">
+					<div class = "col-md-12">
+						<p class = editDelete><a href = "{{url_for('editRestaurant', restaurant_id = restaurant.id) }}">Edit</a>
+						<a href = "{{url_for('deleteRestaurant', restaurant_id = restaurant.id) }}">Delete</a></p>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</body>
+
+
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel = stylesheet type = text/css href = "{{ url_for('static', filename = 'css/styles.css') }}">	
+	<link rel="stylesheet" href= "{{ url_for('static', filename = 'css/bootstrap.min.css') }}">
+</head>
+
+<body>
+	<div class = "container, menuProjectDefault">
+		<form action = '{{url_for("deleteRestaurant", restaurant_id = restaurant.id)}}' method = 'post'>
+
+		<h3> Are you sure you want to delete {{restaurant.name}}?  This will also delete all menu items.  This cannot be undone. </h3>
+
+		<input type = 'submit' value = 'Delete'>
+		<a href = '{{ url_for("showRestaurants")}}'> Cancel </a>
+
+		</form></br></br>
+	</div>
+</body>
+</html>

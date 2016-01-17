@@ -1,15 +1,27 @@
 <!-- DOCTPE HTML -->
 
 <html>
+	<head>
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel = stylesheet type = text/css href = "{{ url_for('static', filename = 'css/styles.css') }}">	
+		<link rel="stylesheet" href= "{{ url_for('static', filename = 'css/bootstrap.min.css') }}">
+	</head>
 <body>
 
-	<h1> Are you sure you want to delete {{i.name}}?</h1>
+	<div class = 'container, menuProjectDefault'>
 
-	<form action = "{{ url_for('deleteMenuItem', restaurant_id = restaurant_id, menu_id = menu_id)}}" method = 'post'>
+	<h3> Are you sure you want to delete {{item.name}} at {{restaurant.name}}?</h3>
 
-	<input type = 'submit' value = 'Delete'><a href = "{{ url_for('restaurantMenu', restaurant_id = restaurant_id ) }}"> Cancel </a>
+	<form action = "{{ url_for('deleteMenuItem', restaurant_id = restaurant.id, menu_id = item.id)}}" method = 'post'>
+
+		<input type = 'submit' value = 'Delete'> <a href = "{{ url_for('showMenu', restaurant_id = restaurant.id ) }}">Cancel </a>
 
 	</form>
+
+</br>
+</br>
 
 </body>
 </html>
